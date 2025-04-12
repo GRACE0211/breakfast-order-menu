@@ -103,7 +103,7 @@ export default {
     },
   },
   mounted() {
-    fetch('/data/data.json')
+    fetch(import.meta.env.BASE_URL + 'data/data.json')
       .then((res) => res.json())
       .then((data) => {
         this.allProducts = data.map((p) => ({ ...p, count: 0 }))

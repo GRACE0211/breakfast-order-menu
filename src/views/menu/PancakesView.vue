@@ -41,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    fetch('data/data.json') // ✅ 相對路徑讓 GitHub Pages 可用
+    fetch(import.meta.env.BASE_URL + 'data/data.json')
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load data.json')
         return res.json()

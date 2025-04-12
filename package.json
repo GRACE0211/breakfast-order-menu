@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "gh-pages -d docs --repo=https://github.com/GRACE0211/breakfast-order-menu.git",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "lint": "eslint . --fix",
