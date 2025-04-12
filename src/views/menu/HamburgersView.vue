@@ -50,8 +50,8 @@ export default {
         return res.json()
       })
       .then((data) => {
-        this.sandwiches = data
-          .filter((item) => item.type === 'Sandwiches')
+        this.hamburgers = data
+          .filter((item) => item.type === 'Hamburgers')
           .map((item) => ({ ...item, count: 0 }))
       })
       .catch((err) => {
