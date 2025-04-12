@@ -2,7 +2,7 @@
   <div class="main-view">
     <div class="product-list">
       <div v-for="product in omelettes" :key="product.id" class="product-card">
-        <img :src="product.image" alt="product" class="product-image" />
+        <img :src="getImageUrl(product.image)" alt="product" class="product-image" />
         <div class="product-details">
           <div class="product-title">{{ product.title }}</div>
           <div class="product-description">{{ product.description }}</div>
@@ -38,6 +38,9 @@ export default {
     getCount(product) {
       const item = this.cart.find((p) => p.id === product.id)
       return item ? item.count : 0
+    },
+    getImageUrl(path) {
+      return import.meta.env.BASE_URL + path
     },
   },
   mounted() {
