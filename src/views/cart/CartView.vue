@@ -1,7 +1,7 @@
 <template>
   <div class="cart-container">
     <h2 class="cart-title">🛒 購物車</h2>
-    <div v-if="cart.length > 0" class="cart-list">
+    <div v-if="cart && cart.length > 0" class="cart-list">
       <div v-for="item in cart" :key="item.id" class="cart-item">
         <img :src="item.image" alt="product" class="cart-item-image" />
         <div class="cart-item-info">
@@ -33,8 +33,13 @@
 <script>
 export default {
   name: 'CartView',
-  props: ['cart'],
-  emits: ['increase', 'decrease', 'remove'],
+  props: {
+    cart: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  emits: ['increase', 'decrease', 'remove'], // ← 少了這個逗號！！
   computed: {
     totalPrice() {
       return this.cart.reduce((total, item) => total + item.price * item.count, 0)

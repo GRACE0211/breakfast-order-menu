@@ -7,7 +7,7 @@
           <div class="product-title">{{ product.title }}</div>
           <div class="product-description">{{ product.description }}</div>
           <div class="product-price">${{ product.price }}</div>
-          <button class="add-to-cart-btn" @click="$emit('add-to-cart', product)">
+          <button class="add-to-cart-btn" @click="handleAdd(product)">
             Add To Cart<span v-if="getCount(product)"> ( {{ getCount(product) }} )</span>
           </button>
         </div>
@@ -19,13 +19,13 @@
 <script>
 export default {
   name: 'DrinksView',
+  props: ['cart'],
   emits: ['add-to-cart'],
   data() {
     return {
       drinks: [],
     }
   },
-  props: ['cart'],
   methods: {
     handleAdd(product) {
       // 1. 顯示括號用的 count 自增
@@ -41,12 +41,18 @@ export default {
     },
   },
   mounted() {
-    fetch('/data/data.json')
-      .then((res) => res.json())
+    fetch('data/data.json') // ✅ 相對路徑讓 GitHub Pages 可用
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load data.json')
+        return res.json()
+      })
       .then((data) => {
-        this.drinks = data
-          .filter((item) => item.type === 'Drinks')
+        this.sandwiches = data
+          .filter((item) => item.type === 'Sandwiches')
           .map((item) => ({ ...item, count: 0 }))
+      })
+      .catch((err) => {
+        console.error('Fetch error:', err)
       })
   },
 }

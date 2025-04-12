@@ -1,44 +1,44 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import MenuView from '../views/MenuView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      redirect: '/menu',
+      redirect: '/menu/sandwiches',
     },
     {
-      path: '/menu',
+      path: '/',
       component: MenuView,
       children: [
         {
-          path: 'sandwiches',
+          path: 'menu/sandwiches',
           component: () => import('../views/menu/SandwichesView.vue'),
         },
         {
-          path: 'hamburgers',
+          path: 'menu/hamburgers',
           component: () => import('../views/menu/HamburgersView.vue'),
         },
         {
-          path: 'pancakes',
+          path: 'menu/pancakes',
           component: () => import('../views/menu/PancakesView.vue'),
         },
         {
-          path: 'omelettes',
+          path: 'menu/omelettes',
           component: () => import('../views/menu/OmelettesView.vue'),
         },
         {
-          path: 'drinks',
+          path: 'menu/drinks',
           component: () => import('../views/menu/DrinksView.vue'),
         },
         {
-          path: '',
-          redirect: 'sandwiches',
+          path: 'cart', // ✅ ⬅ 移進 MenuView 裡面
+          component: () => import('../views/cart/CartView.vue'),
         },
         {
-          path: '/cart',
-          component: () => import('../views/cart/CartView.vue'),
+          path: '',
+          redirect: 'menu/sandwiches',
         },
       ],
     },
