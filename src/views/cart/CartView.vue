@@ -3,7 +3,7 @@
     <h2 class="cart-title">🛒 購物車</h2>
     <div v-if="cart && cart.length > 0" class="cart-list">
       <div v-for="item in cart" :key="item.id" class="cart-item">
-        <img :src="item.image" alt="product" class="cart-item-image" />
+        <img :src="getImageUrl(item.image)" alt="product" class="cart-item-image" />
         <div class="cart-item-info">
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
@@ -43,6 +43,11 @@ export default {
   computed: {
     totalPrice() {
       return this.cart.reduce((total, item) => total + item.price * item.count, 0)
+    },
+  },
+  methods: {
+    getImageUrl(path) {
+      return import.meta.env.BASE_URL + path
     },
   },
 }
